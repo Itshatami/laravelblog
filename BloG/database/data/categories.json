@@ -1,0 +1,17 @@
+[
+   {
+      "name": "Laravel",
+      "slug": "laravel",
+      "description": "very powerfull framework for both frontend and backend based on php"
+   },
+   {
+      "name": "Symfony",
+      "slug": "symfony",
+      "description": "symfony is a wonderfull framework for php that makes easy to build a server"
+   },
+   {
+      "name": "Tailwind Css",
+      "slug": "tailwind-css",
+      "description": "tailwindcss is one of the framework have a large comunity supporting"
+   }
+]
