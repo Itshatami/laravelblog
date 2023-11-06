@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Article;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,12 +16,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [ArticleController::class , 'index']);
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $articles = Article::where('user_id', auth()->id())->paginate();
+    return view('dashboard', compact('articles'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -28,4 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+Route::middleware('auth')->resource('dashboard/articles', ArticleController::class)->except(['index', 'show']);
+Route::resource('articles', ArticleController::class)->only(['index', 'show']);
+
+require __DIR__ . '/auth.php';
